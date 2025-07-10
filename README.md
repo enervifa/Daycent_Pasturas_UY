@@ -1,12 +1,43 @@
-# Resultados de modelación de biomasa den DAYCENT de pasturas por región agroecológica en Uruguay.
+**ViSimPasturas-Uruguay** is an interactive **RShiny app** for visualizing pasture biomass simulations in Uruguay across agroecological regions. Simulations were generated using **DayCent** model, covering a period of 92 years (1930–2021). This tool provides valuable insights into forage availability over time and space, supporting livestock planning and resource management.
 
-Se obtuvieron resultados de modelación de biomasa de pasturas naturales por región agroecológica para Uruguay a través de la implementación y calibración del modelo Century en sus dos versiones: la de paso mensual (“Century”) y la más reciente a paso diario (DayCent) para cada uno de los tipos de suelo dominantes de cada región agroecológica de Uruguay. Este trabajo resultó en datos de producción de materia seca de pasturas a paso diario y a paso mensual para más de 90 años. 
-Estos modelos calculan stocks de C a través de la simulación de los procesos biogeoquímicos y las interacciones en un ecosistema a lo largo del tiempo. Tienen en cuenta factores como la descomposición de materia orgánica, los ciclos de nutrientes y la respuesta del cultivo a las condiciones ambientales. Son adecuados para comprender los procesos biogeoquímicos en ecosistemas naturales y modificados por sistemas de producción agropecuaria.  Los modelos DSSAT (en los cuales se basa la plataforma SIMAGRI), son más adecuados para estudios centrados en la producción de cultivos anuales y el impacto de medidas de manejo.
+**🚀 Link to the app:**  https://enervifa.shinyapps.io/Daycent_Pasturas_II/
 
-Se creó una base de datos de producción de materia seca de pasturas (kg/ha) simulada utilizando los modelos Century y DayCent para cada una de las zonas agroecológicas del país. La base de datos abarcó un período de 92 años, permitiendo capturar la variabilidad climática que afecta a los niveles de producción en el tiempo. Se observó un ajuste aceptable en todas las cuatro estaciones del año para las diferentes zonas de estudio.
+---
 
-Además, se analizó la relación con el índice CONEAT de las zonas agroecológicas como unidad de estudio, se observaron correlaciones moderadas y significativas entre la mediana de las simulaciones y el promedio del índice CONEAT. La correlación fue particularmente fuerte para la suma de los percentiles 75, indicando que el índice CONEAT podría estar sobreestimando la producción de biomasa de las pasturas. Esto parece ser particularmente cierto en la zona de Cristalino del Centro que se caracteriza por tener gran heterogeneidad de suelos, y muchos de ellos están agrupados en una misma unidad CONEAT (por ej.: la unidad 5.02b).  Los resultados se encuentran adjuntos en el entregable de la herramienta.
+## 🌱 Key Features
 
-Los datos simulados se organizaron en cuartiles, para poder visualizarlos de forma útil como una primera versión de una herramienta online, se desarrolló un visualizador interactivo con datos de producción de pasturas para cada zona agroecológica a nivel estacional, con utilidad para la planificación de productores ganaderos 
+- Biomass simulations (kg/ha) for natural pastures by **agroecological region** and **dominant soils**
+- Yearly and seasonal summaries 
+- Quantile-based summaries supporting planning management
+- Simple **interactive visualization** using **RShiny**
+- Integration of zone shapefiles for geographic context of the user
 
-Esta versión cuenta con salidas del modelo pre-cargadas, siendo su único objetivo es disponibilizar información simulada para su visualización y análisis. Esta aplicación tiene un gran potencial para la toma de decisiones en la planificación ganadera, ya que permite a los productores acceder a datos clave sobre la disponibilidad de forraje a lo largo del año, optimizando así la gestión de los recursos y mejorando la eficiencia productiva en función de las condiciones agroclimáticas específicas de cada región.
+---
+
+## Repository Structure
+ViSimPasturas-Uruguay/
+├── app.R # Main Shiny app file
+├── README.md # This file
+├── daycent_data.csv # Simulated pasture production data (yearly)
+├── percentiles_decenfeb.csv # Quantile summaries for Feb–Dec
+├── observed.csv # Observed or comparative biomass data
+├── overlay_stats_R.xlsx # Statistical comparison outputs (e.g. vs CONEAT)
+├── zonas_agroecologicas_latlon_SecPol # Agroecological shapefile data
+├── Agroecol por suelos/ # Supplementary zone-soil mapping (folder)
+└── LICENSE # MIT license
+
+---
+
+📸 Preview 
+![screenshot](screenshot.png)
+
+👥 Authors
+Eliana Nervi Faggiani & Walter Baethgen
+Instituto Nacional de Investigaci´on Agropecuaria (INIA), Proyecto FPTA 358, Montevideo, Uruguay
+
+
+
+
+---
+
+
