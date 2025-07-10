@@ -6,7 +6,6 @@ library(dplyr)
 library(utils)
 library(zip)
 library(RColorBrewer)
-#install.packages("viridisLite")
 library(viridisLite) 
 library(viridis) 
 library(DT)
@@ -19,7 +18,6 @@ library(readxl)
 mi_paleta_viridis <- viridis(11)
 #https://gl-li.github.io/study-notes/shiny_click_on_a_map.html
         # This aims to allow the visualziation of thE analysis of the three micro-catchments at the same time. 
-        #
         library(lubridate)
         library(shiny)
         library(ggplot2)
@@ -36,51 +34,23 @@ library(sass)
 library(shiny)
 library(shiny.fluent)
 library(shiny.react)
-#library(rhino)
-#rhino::init("RhinoApplication")
-#remotes::install_github("Appsilon/shiny.react")
-#remotes::install_github("Appsilon/shiny.fluent")
 library(shinydashboard)
 library(leaflet)
-
-# header <- dashboardHeader(
-#   title = "Modelación de biomasa de pasturas por región agroecologica, Uruguay"
-# )
 
 header <-dashboardHeader(
   title = div(
     HTML('<strong><span style="font-size:15px; color:white;">Modelación de biomasa de pasturas por región agroecologica,<br>Uruguay</span></strong>')
   ))
 
-
+##menu
 sidebar <- dashboardSidebar(
   
   width = 200,
- # sidebarUserPanel("FPTA 358",
-                   #subtitle = a(href = "#", icon("circle", class = "text-success"), "Online")#,
-                   # Image file should be in www/ subdir
-                   #image = "userimage.png"
                    sidebarMenu(
                      menuItem("Seleccionar region", tabName = "selectRegion", icon = icon("map")),
                      menuItem("Tabla de datos", tabName = "dataTables", icon = icon("table")),
                      menuItem("Performance del modelo", tabName = "analisis", icon = icon("chart-line"))))
-# sidebarLayout(
-#   sidebarPanel(
-#     
-#  
-# 
-# helpText("En Uruguay existe una buena experiencia en la aplicación de modelos de simulación dinámicos (“modelo Century”), y una versión mejorada más detallada del mismo (“modelo Daycent”),
-#                para estudiar la productividad de diferentes tipos de pasturas en diferentes tipos de suelos.Los modelos simulan la dinámica de la materia orgánica y los nutrientes de los suelos y 
-#                la productividad de pasturas, cultivos anuales y árboles. Son particularmente sensibles a la capacidad de
-#                almacenamiento de agua de los suelos, al tipo de pasturas, a las condiciones climáticas y a la tecnología empleada. 
-#                
-#                Aqui se observa solamente la producción de pasturas
-#                por zona agroecológica. Estos resultados son parte una amplia recopilación de datos y experiencia en el modelo (aqui las citas)"),
-# helpText(strong("Para obtener una visualización de los resultados simulados y datos observados, haga click en el mapa en la región agroecológica que desea explorar")), 
-# helpText("y observe los resultados de lo simulado vs datos observados estacionales (1917-2023) por zona agroeceológica"),
-# helpText("Ambos modelos logran simular valores de biomasa seca de pasturas muy cercanos a los observados, siendo el Daycent el que presenta una menor variabilidad. Los datos observados fueron recopilados por el informe de FAO elaborado por BERRETA (cita) y otros datos observados (citas)")
-#   ))
-
+### cuerpo
 body <- dashboardBody(
   
   tabItems(
@@ -146,7 +116,7 @@ body <- dashboardBody(
     
     tabItem(
       tabName = "analisis",
-      # Descriptive Information Outside Tabs
+      # Descripcion
       helpText(
         HTML('<strong><span style="font-size:20px; color:blue;">Modelos biogeoquímicos: DAYCENT</span></strong>')
       ),
@@ -184,7 +154,7 @@ body <- dashboardBody(
         )
       ),
       
-      # Tabbed Panel for Plots
+      # Panel de graficos
       tabsetPanel(
         tabPanel(
           "Global por mes",
@@ -224,53 +194,9 @@ body <- dashboardBody(
 )
 
 
-# body <- dashboardBody(
-#   tabItems(
-#     tabItem(tabName = "Seleccionar region",
-#   fluidRow(
-#     column(width = 9,
-#            box(width = NULL, solidHeader = TRUE,
-#                leafletOutput("map", height = 500)
-#            ))),
-#            
-#            tabsetPanel(
-#                # tabPanel("Percentiles anuales",
-#                #          textOutput("selectedShape"),
-#                #          textOutput("descripcion"),
-#                #          plotlyOutput("plot2", width = "120%")
-#                #          #textOutput("descripcion_plot2")
-#                # ),
-#                tabPanel(title = "Percentiles anuales",
-#                         fluidRow(
-#                           column(6,div(style='width:1000px; overflow-x: scroll;height:500px;overflow-y: scroll;', #h3("Percentiles de Biomasa seca de pasturas kg/ha por estación simulada y observada")
-#                                        plotlyOutput("plot2",width = 950,height = 600))))),
-#                tabPanel("Mensual",
-#                         fluidRow(
-#                           column(6,div(style='width:1000px; overflow-x: scroll;height:500px;overflow-y: scroll;', #h3("Percentiles de Biomasa seca de pasturas kg/ha por estación simulada y observada")
-#                                        plotlyOutput("plot3",width = 950,height = 600)))))
-#                
-#                # textOutput("selectedShape"),
-#                #  plotlyOutput("plot3")
-#                #textOutput("descripcion_plot3")
-#              )),
-#   tabItem(tabName = "Tabla de datos",  
-#              navlistPanel(
-#                
-#                "Todas las regiones",
-#                tabPanel("Tabla de datos",
-#                         DT::dataTableOutput("tabla2"),
-#                         textOutput("descripcion_tabla2")))),
-#   tabItem(tabName = "Performance del modelo",
-#                tabPanel("Simulado vs observado estacional",
-#                         fluidRow(
-#                           column(6,div(style='width:1000px; overflow-x: scroll;height:500px;overflow-y: scroll;', #h3("Percentiles de Biomasa seca de pasturas kg/ha por estación simulada y observada")
-#                                        plotlyOutput("plot4",width = 950,height = 600))))),
-#                #plotlyOutput("plot4"),
-#                textOutput("descripcion_tabla3")
-#              )
-#            ))
-    
 
+    
+##dash
 ui <-dashboardPage(
   header,sidebar,
  # dashboardSidebar(disable = FALSE),
@@ -278,7 +204,7 @@ ui <-dashboardPage(
 )
 
 
-        # Define server logic
+        # server logic
         server <- function(input, output, session) {
           require(gridExtra)
           require(ggplot2)
@@ -307,39 +233,10 @@ ui <-dashboardPage(
           #Define bins for color classification
           bins <- c(0, 10, 20, 50, 100, 200, 500, 1000, Inf)
           
-          # Create a color palette based on the bins
-         # pal <- colorBin("YlOrRd", domain = uy_nrm_sf$ZONA_AGROE, bins = bins)
-          
+                  
           uy_nrm_sf <- sf::st_make_valid(uy_nrm_sf)
           
-          # # Generate a palette of colors
-          # #n_regions <- length(unique(uy_nrm_sf$REGION_N))
-          # pal <- brewer.pal(12, "Set3")
-          # # Create the plot of polygons
           
-         # output$map <- renderPlot({
-            # #map<-plot(uy_nrm_sf["REGION_N"])
-            # # Generate a palette of colors with more values
-            # n_regions <- length(unique(uy_nrm_sf$REGION_N))
-            # pal <- viridis_pal(option = "turbo")(n_regions)  # Using 'viridis' palette
-            # 
-            # Convert the sf object to a data frame
-           # uy_nrm_df <- as.data.frame(uy_nrm_sf)
-            
-          #   # Create a ggplot using geom_sf()
-          # Plotmap<- ggplot() +
-          #     geom_sf(data = uy_nrm_sf, aes(fill = REGION_N), color = "black", size = 1) +
-          #     scale_fill_manual(values = pal) +
-          #     labs(fill = "Zona Agroe") +
-          #     theme_minimal()
-          # 
-          # ggplotly(Plotmap)
-          # 
-          # })
-          
-###Much better map in leflet but cannot save click coordinates yet
-          # Define a color palette based on unique labels
-          #pal <- leaflet::colorFactor(palette = "Spectral", domain = uy_nrm_sf$REGION_N)
           custom_palette <- c("grey", turbo(10))
           pal <- leaflet::colorFactor(
             palette = custom_palette,  # Adjust the number of colors as needed
@@ -401,33 +298,7 @@ ui <-dashboardPage(
           })
           
           # # Function to observe click event and update selected input
-          # observeEvent(input$map_shape_click, {
-          #   click <- input$map_shape_click
-          #   selected_shape <- uy_nrm_sf[uy_nrm_sf$REGION_N == click$id, ]
-          #   output$selectedShape <- renderText({
-          #     paste("Selected Shape ID:", click$id, "\n")
-          #   })
-          #   
-          # })
-          
-          # observeEvent(input$map_shape_click, {
-          #   click <- input$map_shape_click
-          #   
-          #   # Check if the clicked ID exists in the dataset
-          #   if (click$id %in% uy_nrm_sf$REGION_N) {
-          #     selected_shape <- uy_nrm_sf[uy_nrm_sf$REGION_N == click$id, ]
-          #     output$selectedShape <- renderText({
-          #       paste("Selected Shape ID:", click$id, "\n")
-          #     })
-          #     # Update selected input here (e.g., updateSelectInput, updateTextInput, etc.)
-          #     # For example: updateSelectInput(session, "selected_input_id", selected_shape$column_to_update)
-          #   } else {
-          #     output$selectedShape <- renderText({
-          #       "No region found"
-          #     })
-          #   }
-          # })
-          
+                    
           clickedRegion <- reactiveVal(NULL)
           
           observeEvent(input$map_shape_click, {
@@ -469,9 +340,7 @@ ui <-dashboardPage(
           #instead of reading I am calculating this from daycent_data and century_data where I put all the reuslts together
           #this is 09022024 The reason i did this mannualy is I was provided an excel with daycent ancd centruy data togethers
           #this makes it very hard to read automatically in R, so I tidy them togetehr torread. The output is one value epr month every year.
-          
           ##read csv files with all data
-         # setwd("C:/Users/Lenovo/Downloads/Shiny_todos/Carbono_WB4_readingfromoutpu/Walter files")
           data_day<- read.csv("daycent_data.csv", stringsAsFactors = FALSE)
           #data_cen <- read.csv("../Walter files/century_data.csv", stringsAsFactors = FALSE)
           #
@@ -503,7 +372,7 @@ ui <-dashboardPage(
             group_by(ZAgrEc, modelo, Year_adj, Trimester) %>%
             summarise(Total_MS = sum(MS.MES, na.rm = FALSE))%>%
             ungroup()
-          #           ##Jjust pointing out the the first year values start in winter as first month DEC is 0, so not adding onlty Jan and Feb here.
+          ##Jjust pointing out the the first year values start in winter as first month DEC is 0, so not adding onlty Jan and Feb here.
           #
           #           # Calculate the percentiles
           percentiles <-  data_day_tri %>%
@@ -522,127 +391,7 @@ ui <-dashboardPage(
             rename(Estacion = Trimester,Modelo=modelo)%>%
             select(ZAgrEc, Modelo, Estacion, Perc_005, Perc_01, Perc_025, Perc_05, Perc_075, Perc_09, Perc_095)%>%
             mutate(calculo="dicenefebr")
-          #
-          # # ### OTO = APR MAY JUN , INV = jul ago set (COMO HICE CON CENTURY)
-          # data_day_tri <-  data_day%>%
-          #   mutate(Month_Number = case_when(
-          #     month == "ENE" ~ 1,
-          #     month == "FEB" ~ 2,
-          #     month == "MAR" ~ 3,
-          #     month == "ABR" ~ 4,
-          #     month == "MAY" ~ 5,
-          #     month == "JUN" ~ 6,
-          #     month == "JUL" ~ 7,
-          #     month == "AGO" ~ 8,
-          #     month == "SET" ~ 9,
-          #     month == "OCT" ~ 10,
-          #     month == "NOV" ~ 11,
-          #     month == "DIC" ~ 12
-          #   ),# Adjust year for December
-          #   # Year_adj = ifelse(Month_Number == 12, year + 1, year),
-          #   Trimester = case_when(
-          #     Month_Number %in% c(1, 2, 3) ~ "VERANO",  # December, January, February
-          #     Month_Number %in% c(4, 5, 6) ~ "OTONO",    # March, April, May
-          #     Month_Number %in% c(7, 8, 9) ~ "INVIERNO", # June, July, August
-          #     Month_Number %in% c(10, 11, 12) ~ "PRIMAVERA"  # September, October, November
-          #   )) %>%
-          #   slice(-1,)%>%
-          #   group_by(ZAgrEc, modelo, year, Trimester) %>%
-          #   summarise(Total_MS = sum(MS.MES, na.rm = TRUE))
-          # #           ##Jjust pointing out the the first year values start in winter as first month DEC is 0, so not adding onlty Jan and Feb here.
-          # #
-          # #           # Calculate the percentiles
-          # percentiles2 <-  data_day_tri %>%
-          #   filter(year >= 1917) %>%  ### watch here!
-          #   group_by(ZAgrEc, modelo, Trimester) %>%
-          #   summarise(
-          #     Perc_005 = quantile(Total_MS, 0.05),
-          #     Perc_01 = quantile(Total_MS, 0.10),
-          #     Perc_025 = quantile(Total_MS, 0.25),
-          #     Perc_05 = quantile(Total_MS, 0.50),
-          #     Perc_075 = quantile(Total_MS, 0.75),
-          #     Perc_09 = quantile(Total_MS, 0.90),
-          #     Perc_095 = quantile(Total_MS, 0.95)
-          #   ) %>%
-          #   ungroup()%>%
-          #   rename(Estacion = Trimester,Modelo=modelo)%>%
-          #   select(ZAgrEc, Modelo, Estacion, Perc_005, Perc_01, Perc_025, Perc_05, Perc_075, Perc_09, Perc_095)%>%
-          #   mutate(calculo="enfebmar")
-          # #
-          # 
-          # Save the percentiles dataframe to a CSV file
           
-       #   write.csv(file ="percentiles_triinyear.csv", percentiles2)
-       #   write.csv(file ="percentiles_decenfeb.csv", percentiles)
-          ##compare with model_results2.csv that was made using Walter summary tables
-          
-         # model_results <- read.csv("../model_results2.csv")%>%
-        #    mutate(calculo="planillaWB")%>%
-         #   select(ZAgrEc, Modelo, Estacion, Perc_005, Perc_01, Perc_025, Perc_05, Perc_075, Perc_09, Perc_095, calculo)
-          # Right join percentiles with model_results
-         # two_join_1 <-  bind_rows(percentiles, model_results)
-         # # Right join percentiles2 with the result of the first join
-         # three_final <- bind_rows(percentiles2, two_join_1)#%>%
-          #select(-c(X,X.1,X.2,X.3,X.4,X.5,X.6))
-          #
-          #
-          # # Convert Percentiles from wide to long format
-          # model_results_region_long <- tidyr::pivot_longer(three_final ,
-          #                                                  cols = starts_with("Perc_"),
-          #                                                  names_to = "Percentile",
-          #                                                  values_to = "Values")%>%
-          #   mutate(Combined = paste(Modelo, calculo, sep = "_"))
-          
-          #
-          # # Assuming observed results are also in the same dataframe, you'll extract them similarly
-          # # This step might differ depending on your observed data's structure
-          #
-          #
-          # # Create a dataset for the medians
-          # model_medians <- model_results_region_long %>%
-          #   filter(Percentile == 'Perc_05') %>%
-          #   mutate(Median_Values = Values, Median_ID = Combined)
-          # #
-          # observed_results <- read_csv("observed.csv")
-          # # ## left join   observed_results
-          # #
-          # # # Create a dataset for the medians
-          # observed_results <- observed_results%>%
-          #   mutate(Combined="observed")
-          # #
-          # # ### Plot
-          # #
-          # #
-          # #
-          # # # Create the plot using ggplot2
-          # ## add  legend_position = "bottom"
-          # g11 <- ggplot() +
-          #   geom_point(data = model_results_region_long %>%
-          #                filter(Modelo %in% c("Daycent", "daycent")),
-          #              aes(x = Estacion, y = Values, color = Combined),alpha=0.3) + #shape = Percentile
-          #   geom_line(data = model_medians%>%
-          #               filter(Modelo %in% c("Daycent", "daycent")),
-          #             aes(x = Estacion, y = Median_Values, color = Combined, group = Combined), size = 0.5) +
-          #   geom_line(data = observed_results,
-          #             aes(x = Estacion, y = OBS, color = Modelo,  group = Modelo), size = 0.5) +
-          #   scale_x_discrete(labels = c("Otoño", "Invierno", "Primavera", "Verano")) +
-          #   scale_color_discrete(name = "Modelo") +
-          #   # scale_shape_manual(name = "Percentile", values = c(16, 17, 18, 19, 20, 21, 22)) +
-          #   scale_linetype_manual(name = "Median", values = "dashed", labels = "Median") +
-          #   facet_wrap(~ ZAgrEc) +
-          #   labs(x = "Estacion", y = "Biomasa seca kg/ha",
-          #        title = "Percentiles de Biomasa seca de pasturas kg/ha por estación simulada y observada en ZonasAgEc",
-          #   ) +
-          #   theme_bw( ) +
-          #   theme(legend.position = "bottom")
-          # 
-          # 
-          # 
-          # 
-          # print(g11)
-          
-          # ggplotly(g11)
-          # De este grafico, me quedo con diciembrenerofebrero como verano para daycent!!!!
           
           model_results<-read.csv("percentiles_decenfeb.csv")
           data_day<- read.csv("daycent_data.csv", stringsAsFactors = FALSE)
@@ -1561,17 +1310,10 @@ ui <-dashboardPage(
                    )
                  )
                
+
                
-               # g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
-               #   geom_line() +
-               #   labs(x = "Mes", y = "Biomasa seca kg/ha", title = "Simulated Biomass by Month and Percentile") +
-               #   theme_minimal() +
-               #   scale_color_manual(values = color_palette, name = "Percentile") +
-               #   scale_x_continuous(breaks = 1:12, labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))+
-               #   scale_y_continuous(limits = c(y_min, y_max))+
-               #   
                color_palette1 <- setNames(custom_palette, unique(daycentmeses_region_long$Percentile))
-               # Create the ggplot
+               # Create plot
                g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
                  geom_line() +
                  geom_text(
@@ -1607,7 +1349,7 @@ ui <-dashboardPage(
                    legend.text = element_text(size = 10)
                  )
                
-               # Convert to interactive plotly object
+               # interactive
                g12_plotly <- ggplotly(g12) %>%
                  layout(
                    title = list(
@@ -1641,9 +1383,9 @@ ui <-dashboardPage(
                  )
                
                combined_plot <- subplot(
-                 box_plot,  # Plotly box plot
-                 g12_plotly, # ggplot2 plot converted to plotly
-                 nrows = 2,  # Arrange plots in 2 rows
+                 box_plot,  
+                 g12_plotly, 
+                 nrows = 2, 
                  shareX = TRUE,
                  shareY = TRUE
                )
@@ -1659,26 +1401,7 @@ ui <-dashboardPage(
                  filter(ZAgrEc =="BasaltoProfundo")
                # 
                 daycentmeses_region_long <- tidyr::pivot_longer(daycentmeses_region, cols = starts_with("Perc"), names_to = "Percentile", values_to = "Values")
-               # 
-               # 
-               # # Usar la paleta de colores 'viridis' en tu gráfico
-               # g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
-               #   geom_line(show.legend = FALSE) +
-               #   labs(x = "Estacion", y = "Biomasa seca kg/ha", title = "Biomasa seca kg/ha simulada simulada por mes y valor medio en punto, debajo percentiles") +
-               #   theme_minimal() +
-               #   scale_x_continuous(breaks = 1:12) +
-               #   scale_color_manual(values = mi_paleta_viridis)
-               # 
-               # 
-               # g22 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, group = Mes,colour=Mes)) +
-               #   geom_boxplot(show.legend = FALSE) +
-               #   labs(x = "Mes", y = "Biomasa seca kg/ha") +
-               #   theme_minimal() +
-               #   stat_summary(fun.y = mean, geom = "point", shape = 18, size = 2.5) +
-               #   labs(caption = "Los puntos corresponden a la media simulada del mes") +
-               #   scale_x_discrete(labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))
-               # 
-               # plotly::subplot(g22,g12,nrows = 2, margin = 0.1)
+        
                
                ## I am using the compllete data to calulate boxplot 
               
@@ -1689,15 +1412,7 @@ ui <-dashboardPage(
                  mutate(mesN = match(month, c("ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SET", "OCT", "NOV", "DIC")))%>%
                  mutate(mes_col= as.factor(mesN))
                
-                 # summary_stats <- data_day_month %>%
-                 # group_by(ZAgrEc, modelo, month) %>%
-                 # summarise(
-                 #   Median = median(MS.MES, na.rm = TRUE),
-                 #   Mean = mean(MS.MES, na.rm = TRUE),
-                 #   P05 = quantile(MS.MES, 0.05, na.rm = TRUE),
-                 #   P95 = quantile(MS.MES, 0.95, na.rm = TRUE))
-                   
-                   # Plot
+                
                  # Create the box plot
                mean_stats <- data_day_month %>%
                  group_by(mesN) %>%
@@ -1756,14 +1471,7 @@ ui <-dashboardPage(
                  )
                
                
-               # g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
-               #   geom_line() +
-               #   labs(x = "Mes", y = "Biomasa seca kg/ha", title = "Simulated Biomass by Month and Percentile") +
-               #   theme_minimal() +
-               #   scale_color_manual(values = color_palette, name = "Percentile") +
-               #   scale_x_continuous(breaks = 1:12, labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))+
-               #   scale_y_continuous(limits = c(y_min, y_max))+
-               #   
+            
                color_palette1 <- setNames(custom_palette, unique(daycentmeses_region_long$Percentile))
                # Create the ggplot
                g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
@@ -1801,7 +1509,7 @@ ui <-dashboardPage(
                    legend.text = element_text(size = 10)
                  )
                
-               # Convert to interactive plotly object
+               # interactive plotly object
                g12_plotly <- ggplotly(g12) %>%
                  layout(
                    title = list(
@@ -1835,9 +1543,9 @@ ui <-dashboardPage(
                  )
                
                combined_plot <- subplot(
-                 box_plot,  # Plotly box plot
-                 g12_plotly, # ggplot2 plot converted to plotly
-                 nrows = 2,  # Arrange plots in 2 rows
+                 box_plot,  
+                 g12_plotly, }
+                 nrows = 2,  }
                  shareX = TRUE,
                  shareY = TRUE
                )
@@ -1852,26 +1560,7 @@ ui <-dashboardPage(
                  filter(ZAgrEc =="CristalinoCentro")
                
                 daycentmeses_region_long <- tidyr::pivot_longer(daycentmeses_region, cols = starts_with("Perc"), names_to = "Percentile", values_to = "Values")
-               # 
-               # 
-               # # Usar la paleta de colores 'viridis' en tu gráfico
-               # g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
-               #   geom_line(show.legend = FALSE) +
-               #   labs(x = "Estacion", y = "Biomasa seca kg/ha", title = "Biomasa seca kg/ha simulada simulada por mes y valor medio en punto, debajo percentiles") +
-               #   theme_minimal() +
-               #   scale_x_continuous(breaks = 1:12) +
-               #   scale_color_manual(values = mi_paleta_viridis)
-               # 
-               # 
-               # g22 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, group = Mes,colour=Mes)) +
-               #   geom_boxplot(show.legend = FALSE) +
-               #   labs(x = "Mes", y = "Biomasa seca kg/ha") +
-               #   theme_minimal() +
-               #   stat_summary(fun.y = mean, geom = "point", shape = 18, size = 2.5) +
-               #   labs(caption = "Los puntos corresponden a la media simulada del mes") +
-               #   scale_x_discrete(labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))
-               # 
-               # plotly::subplot(g22,g12,nrows = 2, margin = 0.1)
+              }
                data_day_month <-  data_day %>%
                  filter(year >= 1917) %>%  ### watch here!
                  group_by(ZAgrEc, modelo, month)%>%
@@ -1879,23 +1568,14 @@ ui <-dashboardPage(
                  mutate(mesN = match(month, c("ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SET", "OCT", "NOV", "DIC")))%>%
                  mutate(mes_col= as.factor(mesN))
                
-               # summary_stats <- data_day_month %>%
-               # group_by(ZAgrEc, modelo, month) %>%
-               # summarise(
-               #   Median = median(MS.MES, na.rm = TRUE),
-               #   Mean = mean(MS.MES, na.rm = TRUE),
-               #   P05 = quantile(MS.MES, 0.05, na.rm = TRUE),
-               #   P95 = quantile(MS.MES, 0.95, na.rm = TRUE))
-               
-               # Plot
-               # Create the box plot
+              
                mean_stats <- data_day_month %>%
                  group_by(mesN) %>%
                  summarise(mean_MS.MES = mean(MS.MES, na.rm = TRUE))
                y_min <- min(data_day_month$MS.MES, na.rm = TRUE)
                y_max <- max(data_day_month$MS.MES, na.rm = TRUE)
                
-               # Create the box plot with mean points
+
                
                box_plot <- plot_ly(
                  data = data_day_month,
@@ -1946,14 +1626,6 @@ ui <-dashboardPage(
                  )
                
                
-               # g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
-               #   geom_line() +
-               #   labs(x = "Mes", y = "Biomasa seca kg/ha", title = "Simulated Biomass by Month and Percentile") +
-               #   theme_minimal() +
-               #   scale_color_manual(values = color_palette, name = "Percentile") +
-               #   scale_x_continuous(breaks = 1:12, labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))+
-               #   scale_y_continuous(limits = c(y_min, y_max))+
-               #   
                color_palette1 <- setNames(custom_palette, unique(daycentmeses_region_long$Percentile))
                # Create the ggplot
                g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
@@ -2025,14 +1697,14 @@ ui <-dashboardPage(
                  )
                
                combined_plot <- subplot(
-                 box_plot,  # Plotly box plot
-                 g12_plotly, # ggplot2 plot converted to plotly
-                 nrows = 2,  # Arrange plots in 2 rows
+                 box_plot,  
+                 g12_plotly, 
+                 nrows = 2,  
                  shareX = TRUE,
                  shareY = TRUE
                )
                
-               # Display the combined plot
+               # Display 
                combined_plot
                
              }
@@ -2043,26 +1715,7 @@ ui <-dashboardPage(
                  filter(ZAgrEc =="BasaltoSuperficial")
                
                daycentmeses_region_long <- tidyr::pivot_longer(daycentmeses_region, cols = starts_with("Perc"), names_to = "Percentile", values_to = "Values")
-               # 
-               # 
-               # # Usar la paleta de colores 'viridis' en tu gráfico
-               # g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
-               #   geom_line(show.legend = FALSE) +
-               #   labs(x = "Estacion", y = "Biomasa seca kg/ha", title = "Biomasa seca kg/ha simulada simulada por mes y valor medio en punto, debajo percentiles") +
-               #   theme_minimal() +
-               #   scale_x_continuous(breaks = 1:12) +
-               #   scale_color_manual(values = mi_paleta_viridis)
-               # 
-               # 
-               # g22 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, group = Mes,colour=Mes)) +
-               #   geom_boxplot(show.legend = FALSE) +
-               #   labs(x = "Mes", y = "Biomasa seca kg/ha") +
-               #   theme_minimal() +
-               #   stat_summary(fun.y = mean, geom = "point", shape = 18, size = 2.5) +
-               #   labs(caption = "Los puntos corresponden a la media simulada del mes") +
-               #   scale_x_discrete(labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))
-               # 
-               # plotly::subplot(g22,g12,nrows = 2, margin = 0.1)
+        
                
                data_day_month <-  data_day %>%
                  filter(year >= 1917) %>%  ### watch here!
@@ -2071,16 +1724,7 @@ ui <-dashboardPage(
                  mutate(mesN = match(month, c("ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SET", "OCT", "NOV", "DIC")))%>%
                  mutate(mes_col= as.factor(mesN))
                
-               # summary_stats <- data_day_month %>%
-               # group_by(ZAgrEc, modelo, month) %>%
-               # summarise(
-               #   Median = median(MS.MES, na.rm = TRUE),
-               #   Mean = mean(MS.MES, na.rm = TRUE),
-               #   P05 = quantile(MS.MES, 0.05, na.rm = TRUE),
-               #   P95 = quantile(MS.MES, 0.95, na.rm = TRUE))
-               
-               # Plot
-               # Create the box plot
+              
                mean_stats <- data_day_month %>%
                  group_by(mesN) %>%
                  summarise(mean_MS.MES = mean(MS.MES, na.rm = TRUE))
@@ -2137,15 +1781,7 @@ ui <-dashboardPage(
                    )
                  )
                
-               
-               # g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
-               #   geom_line() +
-               #   labs(x = "Mes", y = "Biomasa seca kg/ha", title = "Simulated Biomass by Month and Percentile") +
-               #   theme_minimal() +
-               #   scale_color_manual(values = color_palette, name = "Percentile") +
-               #   scale_x_continuous(breaks = 1:12, labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))+
-               #   scale_y_continuous(limits = c(y_min, y_max))+
-               #   
+            
                color_palette1 <- setNames(custom_palette, unique(daycentmeses_region_long$Percentile))
                # Create the ggplot
                g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
@@ -2234,54 +1870,7 @@ ui <-dashboardPage(
                  filter(ZAgrEc =="Litoral")
                
                 daycentmeses_region_long <- tidyr::pivot_longer(daycentmeses_region, cols = starts_with("Perc"), names_to = "Percentile", values_to = "Values")
-             #   
-             #   
-             #   # Usar la paleta de colores 'viridis' en tu gráfico
-             #   g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
-             #     geom_line(show.legend = FALSE) +
-             #     labs(x = "Estacion", y = "Biomasa seca kg/ha", title = "Biomasa seca kg/ha simulada simulada por mes y valor medio en punto, debajo percentiles") +
-             #     theme_minimal() +
-             #     scale_x_continuous(breaks = 1:12) +
-             #     scale_color_manual(values = mi_paleta_viridis)
-             #   
-             #   
-             #   g22 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, group = Mes,colour=Mes)) +
-             #     geom_boxplot(show.legend = FALSE) +
-             #     labs(x = "Mes", y = "Biomasa seca kg/ha") +
-             #     theme_minimal() +
-             #     stat_summary(fun.y = mean, geom = "point", shape = 18, size = 2.5) +
-             #     labs(caption = "Los puntos corresponden a la media simulada del mes") +
-             #     scale_x_discrete(labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))
-             #   
-             #   plotly::subplot(g22,g12,nrows = 2, margin = 0.1)
-             # }
-             # 
-             # else if (!is.null(clickedID) && is.numeric(clickedID) && clickedID == 6) {
-             #   req(clickedRegion())
-             #   daycentmeses_region <-daycentmeses%>%
-             #     filter(ZAgrEc =="Llanensedeleste")
-             #   
-             #   daycentmeses_region_long <- tidyr::pivot_longer(daycentmeses_region, cols = starts_with("Perc"), names_to = "Percentile", values_to = "Values")
-             #   
-             #   
-             #   # Usar la paleta de colores 'viridis' en tu gráfico
-             #   g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
-             #     geom_line(show.legend = FALSE) +
-             #     labs(x = "Estacion", y = "Biomasa seca kg/ha", title = "Biomasa seca kg/ha simulada simulada por mes y valor medio en punto, debajo percentiles") +
-             #     theme_minimal() +
-             #     scale_x_continuous(breaks = 1:12) +
-             #     scale_color_manual(values = mi_paleta_viridis)
-             #   
-             #   
-             #   g22 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, group = Mes,colour=Mes)) +
-             #     geom_boxplot(show.legend = FALSE) +
-             #     labs(x = "Mes", y = "Biomasa seca kg/ha") +
-             #     theme_minimal() +
-             #     stat_summary(fun.y = mean, geom = "point", shape = 18, size = 2.5) +
-             #     labs(caption = "Los puntos corresponden a la media simulada del mes") +
-             #     scale_x_discrete(labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))
-             #   
-             #   plotly::subplot(g22,g12,nrows = 2, margin = 0.1)
+                   
                
                data_day_month <-  data_day %>%
                  filter(year >= 1917) %>%  ### watch here!
@@ -2290,16 +1879,7 @@ ui <-dashboardPage(
                  mutate(mesN = match(month, c("ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SET", "OCT", "NOV", "DIC")))%>%
                  mutate(mes_col= as.factor(mesN))
                
-               # summary_stats <- data_day_month %>%
-               # group_by(ZAgrEc, modelo, month) %>%
-               # summarise(
-               #   Median = median(MS.MES, na.rm = TRUE),
-               #   Mean = mean(MS.MES, na.rm = TRUE),
-               #   P05 = quantile(MS.MES, 0.05, na.rm = TRUE),
-               #   P95 = quantile(MS.MES, 0.95, na.rm = TRUE))
-               
-               # Plot
-               # Create the box plot
+        
                mean_stats <- data_day_month %>%
                  group_by(mesN) %>%
                  summarise(mean_MS.MES = mean(MS.MES, na.rm = TRUE))
@@ -2357,14 +1937,7 @@ ui <-dashboardPage(
                  )
                
                
-               # g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
-               #   geom_line() +
-               #   labs(x = "Mes", y = "Biomasa seca kg/ha", title = "Simulated Biomass by Month and Percentile") +
-               #   theme_minimal() +
-               #   scale_color_manual(values = color_palette, name = "Percentile") +
-               #   scale_x_continuous(breaks = 1:12, labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))+
-               #   scale_y_continuous(limits = c(y_min, y_max))+
-               #   
+              
                color_palette1 <- setNames(custom_palette, unique(daycentmeses_region_long$Percentile))
                # Create the ggplot
                g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
@@ -2453,43 +2026,14 @@ ui <-dashboardPage(
                  filter(ZAgrEc =="Noreste")
                
                 daycentmeses_region_long <- tidyr::pivot_longer(daycentmeses_region, cols = starts_with("Perc"), names_to = "Percentile", values_to = "Values")
-               # 
-               # 
-               # # Usar la paleta de colores 'viridis' en tu gráfico
-               # g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
-               #   geom_line(show.legend = FALSE) +
-               #   labs(x = "Estacion", y = "Biomasa seca kg/ha", title = "Biomasa seca kg/ha simulada simulada por mes y valor medio en punto, debajo percentiles") +
-               #   theme_minimal() +
-               #   scale_x_continuous(breaks = 1:12) +
-               #   scale_color_manual(values = mi_paleta_viridis)
-               # 
-               # 
-               # g22 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, group = Mes,colour=Mes)) +
-               #   geom_boxplot(show.legend = FALSE) +
-               #   labs(x = "Mes", y = "Biomasa seca kg/ha") +
-               #   theme_minimal() +
-               #   stat_summary(fun.y = mean, geom = "point", shape = 18, size = 2.5) +
-               #   labs(caption = "Los puntos corresponden a la media simulada del mes") +
-               #   scale_x_discrete(labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))
-               # 
-               # plotly::subplot(g22,g12,nrows = 2, margin = 0.1)
+             
                data_day_month <-  data_day %>%
                  filter(year >= 1917) %>%  ### watch here!
                  group_by(ZAgrEc, modelo, month)%>%
                  filter(ZAgrEc =="Noreste") %>% ##add mesN
                  mutate(mesN = match(month, c("ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SET", "OCT", "NOV", "DIC")))%>%
                  mutate(mes_col= as.factor(mesN))
-               
-               # summary_stats <- data_day_month %>%
-               # group_by(ZAgrEc, modelo, month) %>%
-               # summarise(
-               #   Median = median(MS.MES, na.rm = TRUE),
-               #   Mean = mean(MS.MES, na.rm = TRUE),
-               #   P05 = quantile(MS.MES, 0.05, na.rm = TRUE),
-               #   P95 = quantile(MS.MES, 0.95, na.rm = TRUE))
-               
-               # Plot
-               # Create the box plot
+             
                mean_stats <- data_day_month %>%
                  group_by(mesN) %>%
                  summarise(mean_MS.MES = mean(MS.MES, na.rm = TRUE))
@@ -2546,15 +2090,7 @@ ui <-dashboardPage(
                    )
                  )
                
-               
-               # g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
-               #   geom_line() +
-               #   labs(x = "Mes", y = "Biomasa seca kg/ha", title = "Simulated Biomass by Month and Percentile") +
-               #   theme_minimal() +
-               #   scale_color_manual(values = color_palette, name = "Percentile") +
-               #   scale_x_continuous(breaks = 1:12, labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))+
-               #   scale_y_continuous(limits = c(y_min, y_max))+
-               #   
+           
                color_palette1 <- setNames(custom_palette, unique(daycentmeses_region_long$Percentile))
                # Create the ggplot
                g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
@@ -2642,26 +2178,7 @@ ui <-dashboardPage(
                  filter(ZAgrEc =="SedimentoSur")
                
                 daycentmeses_region_long <- tidyr::pivot_longer(daycentmeses_region, cols = starts_with("Perc"), names_to = "Percentile", values_to = "Values")
-               # 
-               # 
-               # # Usar la paleta de colores 'viridis' en tu gráfico
-               # g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
-               #   geom_line(show.legend = FALSE) +
-               #   labs(x = "Estacion", y = "Biomasa seca kg/ha", title = "Biomasa seca kg/ha simulada simulada por mes y valor medio en punto, debajo percentiles") +
-               #   theme_minimal() +
-               #   scale_x_continuous(breaks = 1:12) +
-               #   scale_color_manual(values = mi_paleta_viridis)
-               # 
-               # 
-               # g22 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, group = Mes,colour=Mes)) +
-               #   geom_boxplot(show.legend = FALSE) +
-               #   labs(x = "Mes", y = "Biomasa seca kg/ha") +
-               #   theme_minimal() +
-               #   stat_summary(fun.y = mean, geom = "point", shape = 18, size = 2.5) +
-               #   labs(caption = "Los puntos corresponden a la media simulada del mes") +
-               #   scale_x_discrete(labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))
-               # 
-               # plotly::subplot(g22,g12,nrows = 2, margin = 0.1)
+            
                
                data_day_month <-  data_day %>%
                  filter(year >= 1917) %>%  ### watch here!
@@ -2669,17 +2186,7 @@ ui <-dashboardPage(
                  filter(ZAgrEc =="SedimentoSur") %>% ##add mesN
                  mutate(mesN = match(month, c("ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SET", "OCT", "NOV", "DIC")))%>%
                  mutate(mes_col= as.factor(mesN))
-               
-               # summary_stats <- data_day_month %>%
-               # group_by(ZAgrEc, modelo, month) %>%
-               # summarise(
-               #   Median = median(MS.MES, na.rm = TRUE),
-               #   Mean = mean(MS.MES, na.rm = TRUE),
-               #   P05 = quantile(MS.MES, 0.05, na.rm = TRUE),
-               #   P95 = quantile(MS.MES, 0.95, na.rm = TRUE))
-               
-               # Plot
-               # Create the box plot
+             
                mean_stats <- data_day_month %>%
                  group_by(mesN) %>%
                  summarise(mean_MS.MES = mean(MS.MES, na.rm = TRUE))
@@ -2736,15 +2243,7 @@ ui <-dashboardPage(
                    )
                  )
                
-               
-               # g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
-               #   geom_line() +
-               #   labs(x = "Mes", y = "Biomasa seca kg/ha", title = "Simulated Biomass by Month and Percentile") +
-               #   theme_minimal() +
-               #   scale_color_manual(values = color_palette, name = "Percentile") +
-               #   scale_x_continuous(breaks = 1:12, labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))+
-               #   scale_y_continuous(limits = c(y_min, y_max))+
-               #   
+            
                color_palette1 <- setNames(custom_palette, unique(daycentmeses_region_long$Percentile))
                # Create the ggplot
                g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
@@ -2833,26 +2332,7 @@ ui <-dashboardPage(
                  filter(ZAgrEc =="Sierrasdeleste")
                
                 daycentmeses_region_long <- tidyr::pivot_longer(daycentmeses_region, cols = starts_with("Perc"), names_to = "Percentile", values_to = "Values")
-               # 
-               # 
-               # # Usar la paleta de colores 'viridis' en tu gráfico
-               # g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
-               #   geom_line(show.legend = FALSE) +
-               #   labs(x = "Estacion", y = "Biomasa seca kg/ha", title = "Biomasa seca kg/ha simulada simulada por mes y valor medio en punto, debajo percentiles") +
-               #   theme_minimal() +
-               #   scale_x_continuous(breaks = 1:12) +
-               #   scale_color_manual(values = mi_paleta_viridis)
-               # 
-               # 
-               # g22 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, group = Mes,colour=Mes)) +
-               #   geom_boxplot(show.legend = FALSE) +
-               #   labs(x = "Mes", y = "Biomasa seca kg/ha") +
-               #   theme_minimal() +
-               #   stat_summary(fun.y = mean, geom = "point", shape = 18, size = 2.5) +
-               #   labs(caption = "Los puntos corresponden a la media simulada del mes") +
-               #   scale_x_discrete(labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))
-               # 
-               # plotly::subplot(g22,g12,nrows = 2, margin = 0.1)
+            
                
                data_day_month <-  data_day %>%
                  filter(year >= 1917) %>%  ### watch here!
@@ -2860,17 +2340,7 @@ ui <-dashboardPage(
                  filter(ZAgrEc =="Sierrasdeleste") %>% ##add mesN
                  mutate(mesN = match(month, c("ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SET", "OCT", "NOV", "DIC")))%>%
                  mutate(mes_col= as.factor(mesN))
-               
-               # summary_stats <- data_day_month %>%
-               # group_by(ZAgrEc, modelo, month) %>%
-               # summarise(
-               #   Median = median(MS.MES, na.rm = TRUE),
-               #   Mean = mean(MS.MES, na.rm = TRUE),
-               #   P05 = quantile(MS.MES, 0.05, na.rm = TRUE),
-               #   P95 = quantile(MS.MES, 0.95, na.rm = TRUE))
-               
-               # Plot
-               # Create the box plot
+            
                mean_stats <- data_day_month %>%
                  group_by(mesN) %>%
                  summarise(mean_MS.MES = mean(MS.MES, na.rm = TRUE))
@@ -2928,15 +2398,7 @@ ui <-dashboardPage(
                    )
                  )
                
-               
-               # g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
-               #   geom_line() +
-               #   labs(x = "Mes", y = "Biomasa seca kg/ha", title = "Simulated Biomass by Month and Percentile") +
-               #   theme_minimal() +
-               #   scale_color_manual(values = color_palette, name = "Percentile") +
-               #   scale_x_continuous(breaks = 1:12, labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))+
-               #   scale_y_continuous(limits = c(y_min, y_max))+
-               #   
+            
                color_palette1 <- setNames(custom_palette, unique(daycentmeses_region_long$Percentile))
                # Create the ggplot
                g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
@@ -3024,26 +2486,7 @@ ui <-dashboardPage(
                  filter(ZAgrEc =="ColyLomdeE")
                # 
                 daycentmeses_region_long <- tidyr::pivot_longer(daycentmeses_region, cols = starts_with("Perc"), names_to = "Percentile", values_to = "Values")
-               # 
-               # 
-               # # Usar la paleta de colores 'viridis' en tu gráfico
-               # g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
-               #   geom_line(show.legend = FALSE) +
-               #   labs(x = "Estacion", y = "Biomasa seca kg/ha", title = "Biomasa seca kg/ha simulada simulada por mes y valor medio en punto, debajo percentiles") +
-               #   theme_minimal() +
-               #   scale_x_continuous(breaks = 1:12) +
-               #   scale_color_manual(values = mi_paleta_viridis)
-               # 
-               # 
-               # g22 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, group = Mes,colour=Mes)) +
-               #   geom_boxplot(show.legend = FALSE) +
-               #   labs(x = "Mes", y = "Biomasa seca kg/ha") +
-               #   theme_minimal() +
-               #   stat_summary(fun.y = mean, geom = "point", shape = 18, size = 2.5) +
-               #   labs(caption = "Los puntos corresponden a la media simulada del mes") +
-               #   scale_x_discrete(labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))
-               # 
-               # plotly::subplot(g22,g12,nrows = 2, margin = 0.1)
+              
                
                data_day_month <-  data_day %>%
                  filter(year >= 1917) %>%  ### watch here!
@@ -3051,17 +2494,7 @@ ui <-dashboardPage(
                  filter(ZAgrEc =="ColyLomdeE") %>% ##add mesN
                  mutate(mesN = match(month, c("ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SET", "OCT", "NOV", "DIC")))%>%
                  mutate(mes_col= as.factor(mesN))
-               
-               # summary_stats <- data_day_month %>%
-               # group_by(ZAgrEc, modelo, month) %>%
-               # summarise(
-               #   Median = median(MS.MES, na.rm = TRUE),
-               #   Mean = mean(MS.MES, na.rm = TRUE),
-               #   P05 = quantile(MS.MES, 0.05, na.rm = TRUE),
-               #   P95 = quantile(MS.MES, 0.95, na.rm = TRUE))
-               
-               # Plot
-               # Create the box plot
+              
                mean_stats <- data_day_month %>%
                  group_by(mesN) %>%
                  summarise(mean_MS.MES = mean(MS.MES, na.rm = TRUE))
@@ -3119,15 +2552,7 @@ ui <-dashboardPage(
                    )
                  )
                
-               
-               # g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
-               #   geom_line() +
-               #   labs(x = "Mes", y = "Biomasa seca kg/ha", title = "Simulated Biomass by Month and Percentile") +
-               #   theme_minimal() +
-               #   scale_color_manual(values = color_palette, name = "Percentile") +
-               #   scale_x_continuous(breaks = 1:12, labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))+
-               #   scale_y_continuous(limits = c(y_min, y_max))+
-               #   
+             
                color_palette1 <- setNames(custom_palette, unique(daycentmeses_region_long$Percentile))
                # Create the ggplot
                g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
@@ -3216,26 +2641,7 @@ ui <-dashboardPage(
                  filter(ZAgrEc =="ColyLomdeE")
                # 
                daycentmeses_region_long <- tidyr::pivot_longer(daycentmeses_region, cols = starts_with("Perc"), names_to = "Percentile", values_to = "Values")
-               # 
-               # 
-               # # Usar la paleta de colores 'viridis' en tu gráfico
-               # g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
-               #   geom_line(show.legend = FALSE) +
-               #   labs(x = "Estacion", y = "Biomasa seca kg/ha", title = "Biomasa seca kg/ha simulada simulada por mes y valor medio en punto, debajo percentiles") +
-               #   theme_minimal() +
-               #   scale_x_continuous(breaks = 1:12) +
-               #   scale_color_manual(values = mi_paleta_viridis)
-               # 
-               # 
-               # g22 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, group = Mes,colour=Mes)) +
-               #   geom_boxplot(show.legend = FALSE) +
-               #   labs(x = "Mes", y = "Biomasa seca kg/ha") +
-               #   theme_minimal() +
-               #   stat_summary(fun.y = mean, geom = "point", shape = 18, size = 2.5) +
-               #   labs(caption = "Los puntos corresponden a la media simulada del mes") +
-               #   scale_x_discrete(labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))
-               # 
-               # plotly::subplot(g22,g12,nrows = 2, margin = 0.1)
+            
                
                data_day_month <-  data_day %>%
                  filter(year >= 1917) %>%  ### watch here!
@@ -3244,16 +2650,7 @@ ui <-dashboardPage(
                  mutate(mesN = match(month, c("ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SET", "OCT", "NOV", "DIC")))%>%
                  mutate(mes_col= as.factor(mesN))
                
-               # summary_stats <- data_day_month %>%
-               # group_by(ZAgrEc, modelo, month) %>%
-               # summarise(
-               #   Median = median(MS.MES, na.rm = TRUE),
-               #   Mean = mean(MS.MES, na.rm = TRUE),
-               #   P05 = quantile(MS.MES, 0.05, na.rm = TRUE),
-               #   P95 = quantile(MS.MES, 0.95, na.rm = TRUE))
-               
-               # Plot
-               # Create the box plot
+             
                mean_stats <- data_day_month %>%
                  group_by(mesN) %>%
                  summarise(mean_MS.MES = mean(MS.MES, na.rm = TRUE))
@@ -3311,15 +2708,7 @@ ui <-dashboardPage(
                    )
                  )
                
-               
-               # g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
-               #   geom_line() +
-               #   labs(x = "Mes", y = "Biomasa seca kg/ha", title = "Simulated Biomass by Month and Percentile") +
-               #   theme_minimal() +
-               #   scale_color_manual(values = color_palette, name = "Percentile") +
-               #   scale_x_continuous(breaks = 1:12, labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))+
-               #   scale_y_continuous(limits = c(y_min, y_max))+
-               #   
+          
                color_palette1 <- setNames(custom_palette, unique(daycentmeses_region_long$Percentile))
                # Create the ggplot
                g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
@@ -3408,26 +2797,7 @@ ui <-dashboardPage(
                  filter(ZAgrEc =="Llanensedeleste")
                # 
                daycentmeses_region_long <- tidyr::pivot_longer(daycentmeses_region, cols = starts_with("Perc"), names_to = "Percentile", values_to = "Values")
-               # 
-               # 
-               # # Usar la paleta de colores 'viridis' en tu gráfico
-               # g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
-               #   geom_line(show.legend = FALSE) +
-               #   labs(x = "Estacion", y = "Biomasa seca kg/ha", title = "Biomasa seca kg/ha simulada simulada por mes y valor medio en punto, debajo percentiles") +
-               #   theme_minimal() +
-               #   scale_x_continuous(breaks = 1:12) +
-               #   scale_color_manual(values = mi_paleta_viridis)
-               # 
-               # 
-               # g22 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, group = Mes,colour=Mes)) +
-               #   geom_boxplot(show.legend = FALSE) +
-               #   labs(x = "Mes", y = "Biomasa seca kg/ha") +
-               #   theme_minimal() +
-               #   stat_summary(fun.y = mean, geom = "point", shape = 18, size = 2.5) +
-               #   labs(caption = "Los puntos corresponden a la media simulada del mes") +
-               #   scale_x_discrete(labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))
-               # 
-               # plotly::subplot(g22,g12,nrows = 2, margin = 0.1)
+             
                
                data_day_month <-  data_day %>%
                  filter(year >= 1917) %>%  ### watch here!
@@ -3435,17 +2805,7 @@ ui <-dashboardPage(
                  filter(ZAgrEc =="Llanensedeleste") %>% ##add mesN
                  mutate(mesN = match(month, c("ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SET", "OCT", "NOV", "DIC")))%>%
                  mutate(mes_col= as.factor(mesN))
-               
-               # summary_stats <- data_day_month %>%
-               # group_by(ZAgrEc, modelo, month) %>%
-               # summarise(
-               #   Median = median(MS.MES, na.rm = TRUE),
-               #   Mean = mean(MS.MES, na.rm = TRUE),
-               #   P05 = quantile(MS.MES, 0.05, na.rm = TRUE),
-               #   P95 = quantile(MS.MES, 0.95, na.rm = TRUE))
-               
-               # Plot
-               # Create the box plot
+              
                mean_stats <- data_day_month %>%
                  group_by(mesN) %>%
                  summarise(mean_MS.MES = mean(MS.MES, na.rm = TRUE))
@@ -3503,15 +2863,7 @@ ui <-dashboardPage(
                    )
                  )
                
-               
-               # g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
-               #   geom_line() +
-               #   labs(x = "Mes", y = "Biomasa seca kg/ha", title = "Simulated Biomass by Month and Percentile") +
-               #   theme_minimal() +
-               #   scale_color_manual(values = color_palette, name = "Percentile") +
-               #   scale_x_continuous(breaks = 1:12, labels = c("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"))+
-               #   scale_y_continuous(limits = c(y_min, y_max))+
-               #   
+  
                color_palette1 <- setNames(custom_palette, unique(daycentmeses_region_long$Percentile))
                # Create the ggplot
                g12 <- ggplot(daycentmeses_region_long, aes(x = mesN, y = Values, color = Percentile)) +
@@ -3694,37 +3046,7 @@ observed_results_region_longall <- tidyr::pivot_longer(observed_results_table, c
               pivoted_data <- pivot_wider(allsummary, names_from = Modelo, values_from = c(sd, len))
              
                 output$plot4 <- renderPlotly({
-                #   Plot obs data vs sim data by trimester and see correlation
-                # gg <- ggplot(pivoted_data, aes(x = len_Observed, y = len_daycent)) +
-                #   geom_point(aes(color =Estacion , cat= ZAgrEc), size = 1.5) +
-                #   geom_errorbar(
-                #     aes(ymin = len_daycent - sd_daycent, ymax = len_daycent + sd_daycent),
-                #     width = 0.2,alpha=0.2, size=0.3,
-                #     position = position_dodge(width = 0.5)) +
-                #   #geom_line(aes(group = 1)) +
-                #   # geom_errorbar(
-                #   #   aes(ymin = len_Daycent - sd_Daycent, ymax = len_Daycent + sd_Daycent),
-                #   #   width = 0.2,
-                #   #   position = position_dodge(width = 0.5)
-                #   # )+
-                #   scale_color_brewer(palette = "Set1") +
-                #   labs(
-                #     x = "Dato observado",
-                #     y = "Media estacional simulada en Daycent",
-                #     #title = "Daycent vs Observed across seasons"
-                #   ) +
-                #   theme_minimal()+ylim(0,3000)+xlim(0,3000)
-                
-                # # Calculating linear regression coefficients
-                # fit <- lm(len_Daycent ~ len_Observed, data = pivoted_data)
-                # coef <- round(coef(fit), 4)
-                # r_squared <- format(summary(fit)$r.squared, digits = 4)
-                # 
-                # # Formatting equation and R-squared value
-                # equation <- paste("y == ", coef[2], " *x + ", coef[1], sep = "")
-                # r_squared_text <- paste("R² =", r_squared)
-                # 
-                # gg_with_trend <- gg + geom_smooth(method = "lm", se = FALSE, color = "black",size=0.3)
+              
                 
                   ### plot boxplot with biomass per mesN for all ZgAgro group by group=ZAgrEc
                   interactive_plot <- plot_ly(
@@ -3754,17 +3076,7 @@ observed_results_region_longall <- tidyr::pivot_longer(observed_results_table, c
                 
                 
                 # Manually add annotations to the interactive plot
-                # equation_text <- paste("Equation: y =", coef[2], "x +", coef[1])
-                #line_text <- "This is the regression line"
-                # plot0 <- ggplot(na.omit(data_day_tri), aes(x = ZAgrEc, y = Total_MS, color = Trimester, fill = Trimester)) +
-                #   geom_boxplot(position = position_dodge(width = 0.6), lwd = 0.5, alpha = 0.1) +  # Ensure modelo_colors is defined
-                #   labs(
-                #     title = "Distribución de Biomasa seca por Zona Agroecológica",
-                #     x = "Zona Agroecológica",
-                #     y = "kg/ha MS/mes"
-                #   ) +
-                #   theme_bw()
-                # 
+             
                 plot0 <- ggplot(na.omit(data_day_tri), aes(x = ZAgrEc, y = Total_MS, color = Trimester, fill = Trimester)) +
                   geom_boxplot(position = position_dodge(width = 0.6), lwd = 0.5, alpha = 0.1) +  # Ensure modelo_colors is defined
                   labs(
@@ -3797,28 +3109,7 @@ observed_results_region_longall <- tidyr::pivot_longer(observed_results_table, c
                     )
                   )
                   
-                # correspondencia entre ZAgrEc y Tipo_ZAgrEc
-                # mapeo_ZAgrEc_tipo <- c("SedimentoSur" = "SS",
-                #                        "Sierrasdeleste" = "SE",
-                #                        "Agua" = "AA",
-                #                        "ColyLomdeE" = "CL",
-                #                        "CristalinoCentro" = "CC",
-                #                        "Llanensedeleste" = "LL",
-                #                        "BasaltoSuperficial" = "BS",
-                #                        "BasaltoProfundo" = "BP",
-                #                        "Areniscas" = "AR",
-                #                        "Noreste" = "NE",
-                #                        "Litoral" = "LT",
-                #                        "Dunas" = "DU")
-                
-                
-                # Agrega la nueva columna Tipo_ZAgrEc al dataset
-                # model_results <- model_results2 %>%
-                #   mutate(ZAgrEc2 = mapeo_ZAgrEc_tipo[ZAgrEc])
-                
-                ###mapa coneat
-               # rounded_breaks <- c(min(heatmap_data$Value), round(mean(heatmap_data$Value)), max(heatmap_data$Value)) # Adjust the 'by' value as needed
-                
+              
                 overlay_stats_R <- read_excel("overlay_stats_R.xlsx")
                 interactive_plot2<- plotly_boxplot 
                 overlay_stats_R2 <- overlay_stats_R %>%
@@ -3828,73 +3119,13 @@ observed_results_region_longall <- tidyr::pivot_longer(observed_results_table, c
                 # Melt the tibble to long format for better plotting
                 overlay_stats_long <- tidyr::gather(overlay_stats_R2, key = "Variable", value = "Value", -Clase_Mapa)
                 
-                # # Create a list to store individual plots
-                # plot_list <- list()
-                # 
-                # # Get unique variables for faceting
-                # variables <- unique(overlay_stats_long$Variable)
-                # 
-                # # Create a bar plot for each variable
-                # for (var in variables) {
-                #   plot <- overlay_stats_long %>%
-                #     filter(Variable == var) %>%
-                #     plot_ly(
-                #       x = ~Clase_Mapa,
-                #       y = ~Value,
-                #       type = 'bar',
-                #       color = ~Clase_Mapa,
-                #       colors = "Viridis",
-                #       opacity = 0.6,  # Set the opacity of the bars
-                #       text = ~Value,
-                #       textposition = 'outside',
-                #       marker = list(line = list(width = 1.5, color = 'black')),
-                #       name = var
-                #     ) %>%
-                #     layout(
-                #       title = paste("Distribution for", var),
-                #       xaxis = list(title = "Zona Agroecológica", tickangle = 0),  # Set tick angle to 0
-                #       yaxis = list(title = "IndiProd CONEAT"),
-                #       barmode = 'group'
-                #     )
-                #   plot_list[[var]] <- plot
-                # }
-                # 
-                # # Combine all plots into a subplot
-                # combined_plot <- subplot(
-                #   plot_list,
-                #   nrows = length(plot_list),
-                #   shareX = TRUE,
-                #   shareY = TRUE
-                # )
-                # 
-                # # Display the combined plot
-                # combined_plot2
-                
-                
+             
                 
                 ###coneaty mapo
                 heatmap_data <- overlay_stats_R2 %>%
                   pivot_longer(cols = -Clase_Mapa, names_to = "Statistic", values_to = "Value")
                 palette <- rev(brewer.pal(4, "RdYlBu")) 
-                
-                # heatmap_plot <- plot_ly(
-                #   data = heatmap_data,
-                #   x = ~Clase_Mapa,
-                #   y = ~Statistic,
-                #   z = ~Value,
-                #   type = "heatmap",
-                #   colors = palette,
-                #   colorbar = list(
-                #     title = "Value",
-                #     tickvals = quantile(heatmap_data$Value, probs = seq(0, 1, length.out = 5))
-                #   )) %>%
-                #   layout(
-                #     title = "Valores CONEAT extraídos de superponer mapa CONEAT con zonas aroecológicas, promedio, desvío y mediana",
-                #     xaxis = list(title = "Clase_Mapa", tickangle = 0),  # Ensure labels on x-axis are straight
-                #     yaxis = list(title = "Statistic", tickangle = 0),
-                #     showlegend = FALSE# Ensure labels on y-axis are straight
-                #   )
-                
+             
                 heatmap_plot <- plot_ly(
                   data = heatmap_data,
                   x = ~Clase_Mapa,
@@ -3932,16 +3163,7 @@ observed_results_region_longall <- tidyr::pivot_longer(observed_results_table, c
                     )
                   )
                 
-                # 
-                # combined_plot <- subplot(
-                #   plotly_boxplot, heatmap_plot,
-                #   nrows = 2,  # Place both plots in a single row
-                #   margin = 0.05  # Adjust margin to add space between plots
-                # ) #%>%
-        #           layout(
-        #             title = "Distribución de Biomasa seca simualda por Zona Agroecológica y valor de indice CONEAT para la misma",
-        # showlegend = FALSE
-    #)
+               
                 
                 
                 output$plot5 <- renderPlotly({
@@ -3955,102 +3177,10 @@ observed_results_region_longall <- tidyr::pivot_longer(observed_results_table, c
                   plot6<-heatmap_plot
                   plot6
                 })
-                # output$descripcion_heatmap <- renderText({
-                #   paste("Valores promedio, desvío estándar (stand.dev) y mediana del ínidce CONEAT para la Zona Agroecológica,
-                #         *Los valores de CONEAT extaridos de Mapa de índice CONEAT en algunos casos exceden el valore de 100 ")
-                # })
-                # Display the heatmap
-                
-                # Display the interactive plot with annotations
-                # interactive_plot2 <- layout(
-                #   interactive_plot,
-                #   annotations = list(
-                #     list(
-                #       x = 1,  # Setting x to 1 places the annotation at the rightmost edge
-                #       y = 0.05,  # Setting y to 0 places the annotation at the bottom
-                #       xref = "paper",  # x reference is the entire plot area
-                #       yref = "paper",  # y reference is the entire plot area
-                #       text = equation_text, 
-                #       showarrow = FALSE,
-                #       xanchor = "right",  # Anchoring the text to the right
-                #       yanchor = "bottom",  # Anchoring the text to the bottom
-                #       align = "right"  # Aligning the text to the right
-                #     ),
-                #     list(
-                #       x = 1,  # Setting x to 1 places the annotation at the rightmost edge
-                #       y = 0,  # Setting y to 0 places the annotation at the bottom
-                #       xref = "paper",  # x reference is the entire plot area
-                #       yref = "paper",  # y reference is the entire plot area
-                #       text = r_squared_text, 
-                #       showarrow = FALSE,
-                #       xanchor = "right",  # Anchoring the text to the right
-                # #       yanchor = "bottom",  # Anchoring the text to the bottom
-                # #       align = "right"  # Aligning the text to the right
-                #     )
-                #   )
-                # )
-                # 
-                # interactive_plot2
-                #})
-                
-                # Rename Clase_Mapa to match the ZAgrEc column for joining
-                
-                # overlay_stats_R2 <- overlay_stats_R2 %>%
-                #   rename(ZAgrEc = Clase_Mapa)
-                # 
-                # # Join the datasets on ZAgrEc
-                # # Join the datasets on ZAgrEc
-                # combined_data <- data_day_tri %>%
-                #   group_by(ZAgrEc, Trimester) %>%
-                #   summarize(mean_Total_MS = mean(Total_MS, na.rm = TRUE),
-                #             median_Total_MS = median(Total_MS, na.rm = TRUE),
-                #             stand.dev_Total_MS = sd(Total_MS, na.rm = TRUE)) %>%
-                #   left_join(overlay_stats_R2, by = "ZAgrEc")%>%
-                #   ungroup()
-                # 
-                # # Load required libraries
-                # library(dplyr)
-                # library(Hmisc)
-                # library(corrplot)
-                
-          
-                # Aggregate Total_MS by ZAgrEc if needed
-                
-                # # Assuming combined_data is your dataset
-                # # Select the relevant columns
-                # selected_data <- combined_data %>%
-                #   select(mean_Total_MS, median_Total_MS,
-                #          stand.dev_Total_MS,stand.dev., median, average)
-                # selected_data<-na.omit(selected_data)
-                # 
-                # # Convert to matrix for correlation calculation
-                # data_matrix <- as.matrix(aggregated_data %>%
-                #                            select(Total_MS, stand.dev., median, average))
-                # 
-                # # Calculate Spearman correlation and p-values
-                # cor_results <- rcorr(data_matrix, type = "spearman")
-                # 
-                # # Extract correlation matrix and p-values
-                # cor_matrix <- cor_results$r
-                # p_values <- cor_results$P
-                # 
-                # # Ensure dimensions match
-                # print(dim(cor_matrix)) # Should be 4x4
-                # print(dim(p_values))  # Should be 4x4
-                # 
-                # # Plot correlation matrix with significance
-                # corrplot(cor_matrix, 
-                #          method = "color", 
-                #          col = colorRampPalette(c("red", "white", "blue"))(20),
-                #          addCoef.col = "black",  # Color of correlation coefficients
-                #          insig = "pch",          # Show insignificant correlations as symbols
-                #          p.mat = p_values,       # P-values matrix
-                #          sig.level = 0.05,       # Significance level
-                #          number.cex = 0.7)       # Font size of coefficients
-                # 
+               
           
         }        
     
         
-        #shiny::runApp(display.mode="showcase")
+ 
 shinyApp(ui = ui, server = server)
