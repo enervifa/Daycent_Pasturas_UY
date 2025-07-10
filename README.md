@@ -1,7 +1,6 @@
 **ViSimPasturas-Uruguay** is an interactive **RShiny app** for visualizing pasture biomass simulations in Uruguay across agroecological regions. Simulations were generated using **DayCent** model, covering a period of 92 years (1930–2021). This tool provides valuable insights into forage availability over time and space, supporting livestock planning and resource management.
 
 **🚀 Link to the app:**  https://enervifa.shinyapps.io/Daycent_Pasturas_II/
-
 ---
 
 ## 🌱 Key Features
@@ -36,6 +35,7 @@ Eliana Nervi Faggiani & Walter Baethgen
 
 Instituto Nacional de Investigación Agropecuaria (INIA), Proyecto FPTA 358, Montevideo, Uruguay
 
+How to cite >>  DOI: 10.5281/zenodo.15858893
 ---
 
 
