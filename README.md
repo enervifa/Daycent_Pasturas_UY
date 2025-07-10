@@ -16,6 +16,7 @@
 
 ## Repository Structure
 ViSimPasturas-Uruguay/
+
 ├── app.R # Main Shiny app file
 ├── README.md # This file
 ├── daycent_data.csv # Simulated pasture production data (yearly)
