@@ -17,15 +17,15 @@
 ## Repository Structure
 ViSimPasturas-Uruguay/
 
-├── app.R # Main Shiny app file
-├── README.md # This file
-├── daycent_data.csv # Simulated pasture production data (yearly)
-├── percentiles_decenfeb.csv # Quantile summaries for Feb–Dec
-├── observed.csv # Observed or comparative biomass data
-├── overlay_stats_R.xlsx # Statistical comparison outputs (e.g. vs CONEAT)
-├── zonas_agroecologicas_latlon_SecPol # Agroecological shapefile data
-├── Agroecol por suelos/ # Supplementary zone-soil mapping (folder)
-└── LICENSE # MIT license
+├── app.R                              # Main Shiny app file
+├── README.md                          # This file
+├── daycent_data.csv                   # Simulated pasture production data (yearly)
+├── percentiles_decenfeb.csv          # Quantile summaries for Feb–Dec
+├── observed.csv                       # Observed or comparative biomass data
+├── overlay_stats_R.xlsx              # Statistical comparison outputs (e.g. vs CONEAT)
+├── zonas_agroecologicas_latlon_SecPol# Agroecological shapefile data
+├── Agroecol por suelos/              # Supplementary zone-soil mapping (folder)
+└── LICENSE                            # MIT license
 
 ---
 
